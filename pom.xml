@@ -235,7 +235,7 @@
 
 	</dependencies>
 	<build>
-		<finalName>screenshots</finalName>
+		<finalName>springtestapp</finalName>
 		<plugins>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
