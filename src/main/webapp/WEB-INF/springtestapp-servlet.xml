@@ -15,7 +15,11 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 		<property name="suffix" value=".jsp" />
 	</bean>
 	<bean
-		class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping" />
+		class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping">
+		<property name="interceptors">
+			<ref bean="localeChangeInterceptor" />
+		</property>
+	</bean>
 	<bean
 		class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
 		<property name="messageConverters">
@@ -27,4 +31,21 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 	</bean>
 	<bean class="ru.korpse.springtestapp.utils.MyExceptionResolver" />
 	<context:component-scan base-package="ru.korpse.springtestapp.controllers" />
+
+	<bean id="messageSource"
+		class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+		<property name="basename" value="classpath:l10n" />
+		<property name="defaultEncoding" value="UTF-8" />
+	</bean>
+
+	<bean id="localeChangeInterceptor"
+		class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+		<property name="paramName" value="lang" />
+	</bean>
+
+	<bean id="localeResolver"
+		class="org.springframework.web.servlet.i18n.CookieLocaleResolver">
+		<property name="defaultLocale" value="ru" />
+	</bean>
+
 </beans>
