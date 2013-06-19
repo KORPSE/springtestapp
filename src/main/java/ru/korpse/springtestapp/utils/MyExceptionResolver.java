@@ -7,7 +7,7 @@ import lombok.Data;
 
 import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.view.json.MappingJacksonJsonView;
+import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
 import ru.korpse.springtestapp.utils.exceptions.ResourceNotFoundException;
 import ru.korpse.springtestapp.utils.exceptions.SaveFailException;
@@ -27,7 +27,7 @@ public class MyExceptionResolver implements HandlerExceptionResolver {
 		}
 		
 		ModelAndView result = new ModelAndView();
-		MappingJacksonJsonView view = new MappingJacksonJsonView();
+		MappingJackson2JsonView view = new MappingJackson2JsonView();
 		result.setView(view);
 		result.getModel().put("error", ex.getMessage());
 		

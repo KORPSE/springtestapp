@@ -2,6 +2,7 @@ package ru.korpse.springtestapp.entities;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -37,7 +38,7 @@ public class Letter {
 	@Column(name = "published")
 	private boolean published;
 	
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.REMOVE)
 	@JoinColumn(name = "file_id")
 	private File file;
 	

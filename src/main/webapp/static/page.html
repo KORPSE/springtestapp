@@ -7,10 +7,24 @@
 			table {
 				border: 2px solid black; /* Рамка вокруг таблицы */
 				border-collapse: collapse; /* Отображать только одинарные линии */
-			},
+			}
+			
 			#lettersHolder {
 				width: 980px;
-			},
+			}
+			
+			#formRow {
+				border-bottom: 2px solid black;
+			}
+			
+			button {
+				height: 22px;
+				width: 70px;
+				margin: -3px -30px;
+				position: relative;
+				top: 50%;
+				left: 50%;
+			}
 		</style>
     </head>
     <body>
@@ -26,19 +40,23 @@
 				        	<th>Опубликовано</th>
 				        	<th>Файл</th>
 				        	<th>Комментарий</th>
+				        	<th> </th>
 			        	</tr>
-			        	<tr>
-			        		<td><input name="name" type="text"></td>
+			        	<tr id="formRow">
+			        		<td><input name="number" type="text"></td>
 				        	<td><input name="date" type="text"></td>
 				        	<td><input name="subject" type="text"></td>
 				        	<td><input name="published" type="checkbox"></td>
 				        	<td>
-				        		<input name="file.id" id="file" type="hidden">
+				        		<input name="file[id]" id="file_id" type="hidden">
+				        		<input name="file[name]" id="file_name" type="hidden">
+				        		<input name="file[contentType]" id="file_contentType" type="hidden">
 				        		<div id="filenameHolder">
 				        			<a href="#" id="uploadLink">Загрузить</a>
 				        		</div>
 				        	</td>
-				        	<td><input name="comment" type="text"></td>
+				        	<td><input name="description" type="text"></td>
+				        	<td><input type="submit" value="Сохранить"></td>
 			        	</tr>
 			        </table>
 		        </form>
@@ -51,15 +69,16 @@
             <td><%=subject%></td>
             <td><input type="checkbox" <%=(published ? "checked" : "")%>></td>
             <td><a href="/springtestapp/upload/<%=file.id%>"><%=file.name%></a></td>
-            <td><%=number%></td>
+            <td><%=description%></td>
+			<td><button class="removeLink" href="#">Удалить</button></td>
         </script>
         <!-- Scripts -->
         <script src="js/libs/jquery.js"></script>
         <script src="js/libs/underscore.js"></script>
         <script src="js/libs/backbone.js"></script>
+        <script src="js/libs/backbone.syphon.js"></script>
 
         <script src="js/app.js"></script>
-        <script src="js/models/file.js"></script>
         <script src="js/models/letter.js"></script>
         <script src="js/views/letter.js"></script>
         <script src="js/collections/letters.js"></script>
@@ -82,10 +101,16 @@
        			    processData: false,
        			    type: 'POST',
        			    success: function(data){
-       			        $("#file")[0].value = data.id;
+       			        $("#file_id")[0].value = data.id;
+       			        $("#file_name")[0].value = data.name;
+       			        $("#file_contentType")[0].value = data.contentType;
        			        $("#filenameHolder").html(data.name);
        			    }
        			});
+       			
+    	        $("#uploadLink").on("click", function(){
+    	        	$("#fileUpload").click();
+           		})
        		});
         </script>
 

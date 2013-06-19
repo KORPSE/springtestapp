@@ -5,9 +5,8 @@
 (function () {
     
     app.Letter = Backbone.Model.extend({
-        url: GLOBAL_URL + "/data/letters/",
+        urlRoot: GLOBAL_URL + "/data/letters/",
         defaults: {
-            id: 0,
             number: null,
             date: "",
             subject: "",
@@ -16,9 +15,30 @@
             description: null
         },
         initialize: function () {
-            //this.listenTo(this, 'change', function () { console.log("cell changed") });
-        }
 
+        },
+        
+        validate: function (attrs) {
+        	
+        	if (attrs.number.length == 0) {
+        		return "Number must be defined";
+        	}
+
+        	if (attrs.date.length == 0) {
+        		return "Date must be defined";
+        	}
+        	
+        	if (attrs.file == undefined || attrs.file.id == 0) {
+        		return "File must be defined";
+        	}
+        	
+        	if (!/[\d|\+|\-]+/.test(attrs.number)) {
+        		return "Field number is incorrect";
+        	} else if (!/\d{4}\-\d{2}\-\d{2}/.test(attrs.date)) {
+        		return "Field date is incorrect";
+        	}
+        }
+        
     });
     
 }());

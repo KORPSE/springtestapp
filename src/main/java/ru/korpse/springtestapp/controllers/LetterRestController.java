@@ -17,13 +17,13 @@ import ru.korpse.springtestapp.entities.Letter;
 
 @Controller
 
-@RequestMapping("/data/letters/")
+@RequestMapping("/data/letters")
 public class LetterRestController {
 
 	@Autowired
 	private LetterService service;
 	
-	@RequestMapping(value = "/{id}/", method = RequestMethod.GET)
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	@ResponseBody
 	public Letter get(@PathVariable("id") long id) {
 		return service.get(id);
@@ -44,9 +44,9 @@ public class LetterRestController {
 		return service.list();
 	}
 	
-	@RequestMapping(value = "/{id}/", method = RequestMethod.DELETE)
+	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
 	@ResponseBody
-	public void delete(long id) {
+	public void delete(@PathVariable("id") long id) {
 		service.delete(id);
 	}
 }

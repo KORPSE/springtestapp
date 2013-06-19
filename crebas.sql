@@ -10,7 +10,8 @@ CREATE  TABLE IF NOT EXISTS `springtestapp`.`files` (
   `name` VARCHAR(100) NOT NULL ,
   `contentType` VARCHAR(100) NOT NULL,
   PRIMARY KEY (`id`) )
-ENGINE = InnoDB;
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
