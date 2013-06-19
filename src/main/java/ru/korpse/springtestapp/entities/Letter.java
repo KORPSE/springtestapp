@@ -13,6 +13,8 @@ import javax.persistence.Table;
 
 import lombok.Data;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Data
 @Entity
 @Table(name = "letters")
@@ -24,7 +26,8 @@ public class Letter {
 
 	@Column(name = "number")
 	private String number;
-	
+
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
 	@Column(name = "dt")
 	private Date date;
 	
