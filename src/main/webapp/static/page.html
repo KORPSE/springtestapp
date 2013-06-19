@@ -10,31 +10,47 @@
 			},
 			#lettersHolder {
 				width: 980px;
-			}
+			},
 		</style>
     </head>
     <body>
     	<section id="springtestapp">
 	        <h3 align="center">Приказы: </h3>
 	        <div align="center">
-		        <table id="lettersHolder" border="1">
-		        	<tr>
-			        	<th>Номер</th>
-			        	<th>Дата</th>
-			        	<th>Тема</th>
-			        	<th>Опубликовано</th>
-			        	<th>Файл</th>
-			        	<th>Комментарий</th>
-		        	</tr>
-		        </table>
-		    </div>
+	        	<form id="insertForm">
+			        <table id="lettersHolder" border="1">
+			        	<tr>
+				        	<th>Номер</th>
+				        	<th>Дата</th>
+				        	<th>Тема</th>
+				        	<th>Опубликовано</th>
+				        	<th>Файл</th>
+				        	<th>Комментарий</th>
+			        	</tr>
+			        	<tr>
+			        		<td><input name="name" type="text"></td>
+				        	<td><input name="date" type="text"></td>
+				        	<td><input name="subject" type="text"></td>
+				        	<td><input name="published" type="checkbox"></td>
+				        	<td>
+				        		<input name="file.id" id="file" type="hidden">
+				        		<div id="filenameHolder">
+				        			<a href="#" id="uploadLink">Загрузить</a>
+				        		</div>
+				        	</td>
+				        	<td><input name="comment" type="text"></td>
+			        	</tr>
+			        </table>
+		        </form>
+				<input type="file" name="fileUpload" id="fileUpload" style="opacity: 0">
+		</div>
         </section>
         <script type="text/template" id="letter-template">
 			<td><%=number%></td>
             <td><%=date%></td>
             <td><%=subject%></td>
             <td><input type="checkbox" <%=(published ? "checked" : "")%>></td>
-            <td><%=file%></td>
+            <td><a href="/springtestapp/upload/<%=file.id%>"><%=file.name%></a></td>
             <td><%=number%></td>
         </script>
         <!-- Scripts -->
@@ -49,6 +65,29 @@
         <script src="js/collections/letters.js"></script>
         <script src="js/views/letters.js"></script>
 
+        <script>
+	        $("#uploadLink").on("click", function(){
+	        	$("#fileUpload").click();
+       		})
+       		$("#fileUpload").on("change", function() {
+       			
+       			var data = new FormData();
+       			data.append("fileUpload", $("#fileUpload")[0].files[0]);
+       			
+       			$.ajax({
+       			    url: '/springtestapp/upload',
+       			    data: data,
+       			    cache: false,
+       			    contentType: false,
+       			    processData: false,
+       			    type: 'POST',
+       			    success: function(data){
+       			        $("#file")[0].value = data.id;
+       			        $("#filenameHolder").html(data.name);
+       			    }
+       			});
+       		});
+        </script>
 
     </body>
 </html>
