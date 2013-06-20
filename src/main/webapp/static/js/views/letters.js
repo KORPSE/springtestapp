@@ -11,8 +11,7 @@
         
         initialize: function () {
             this.listenTo(this.model, "sync", this.render);
-            //this.listenTo(this.model, "destroy", this.render);
-
+            this.listenTo(this.model, "add", function () { this.model.fetch(); });
             this.model.fetch();
         },
         

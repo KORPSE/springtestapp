@@ -34,7 +34,7 @@
         	
         	if (!/[\d|\+|\-]+/.test(attrs.number)) {
         		return "Field number is incorrect";
-        	} else if (!/\d{4}\-\d{2}\-\d{2}/.test(attrs.date)) {
+        	} else if (!/\d{2}\-\d{2}\-\d{4}/.test(attrs.date)) {
         		return "Field date is incorrect";
         	}
         }
