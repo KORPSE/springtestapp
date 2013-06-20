@@ -33,7 +33,7 @@ public class LetterDao {
 	@SuppressWarnings("unchecked")
 	@Transactional(readOnly = true)
 	public List<Letter> list() {
-		return getSession().createQuery("from Letter").list();
+		return getSession().createQuery("from Letter order by date desc").list();
 	}
 
 	@Transactional
