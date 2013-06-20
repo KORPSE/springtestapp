@@ -129,7 +129,7 @@
 			<version>${org.springframework.version}</version>
 			<scope>test</scope>
 		</dependency>
-		<dependency>
+<!--  		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-core</artifactId>
 			<version>${org.springframework.version}</version>
@@ -144,7 +144,7 @@
 			<artifactId>spring-security-config</artifactId>
 			<version>${org.springframework.version}</version>
 		</dependency>
-
+-->
 		<dependency>
 			<groupId>net.sf.log4jdbc</groupId>
 			<artifactId>log4jdbc4</artifactId>
@@ -181,12 +181,8 @@
 			<version>4.1.2</version>
 		</dependency>
 
-<!--		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-ehcache</artifactId>
-			<scope>compile</scope>
-			<version>4.1.2</version>
-		</dependency> -->
+		<!-- <dependency> <groupId>org.hibernate</groupId> <artifactId>hibernate-ehcache</artifactId> 
+			<scope>compile</scope> <version>4.1.2</version> </dependency> -->
 
 		<dependency>
 			<groupId>org.projectlombok</groupId>
@@ -233,9 +229,46 @@
 		</dependency>
 
 	</dependencies>
+	<repositories>
+		<repository>
+			<id>tomcat</id>
+			<url>http://tomcat.apache.org/dev/dist/m2-repository/</url>
+		</repository>
+		<repository>
+			<id>projectlombok.org</id>
+			<url>http://projectlombok.org/mavenrepo</url>
+		</repository>
+		<repository>
+			<id>com.springsource.repository.bundles.release</id>
+			<name>SpringSource Enterprise Bundle Repository - SpringSource Bundle Releases</name>
+			<url>http://repository.springsource.com/maven/bundles/release</url>
+			<releases>
+				<enabled>true</enabled>
+				<updatePolicy>daily</updatePolicy>
+				<checksumPolicy>warn</checksumPolicy>
+			</releases>
+		</repository>
+
+	</repositories>
 	<build>
 		<finalName>springtestapp</finalName>
 		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-shade-plugin</artifactId>
+				<version>1.4</version>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>shade</goal>
+						</goals>
+						<configuration>
+							<createDependencyReducedPom>true</createDependencyReducedPom>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<configuration>
