@@ -20,7 +20,12 @@
 			}
 			
 			button {
-
+				height: 22px;
+				width: 70px;
+				margin: -3px -30px;
+				position: relative;
+				top: 50%;
+				left: 50%;
 			}
 		</style>
     </head>
@@ -29,7 +34,6 @@
     		<div align="right">
     			[<a href="?lang=en">EN</a>] [<a href="?lang=ru">RU</a>]
     		</div>
-    		<h6>${today}</h6>
 	        <h3 align="center"><spring:message code="label.letters"/>: </h3>
 	        <div align="center">
 	        	<form id="insertForm">

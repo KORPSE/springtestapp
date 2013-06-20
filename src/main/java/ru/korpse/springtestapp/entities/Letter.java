@@ -28,7 +28,7 @@ public class Letter {
 	@Column(name = "number")
 	private String number;
 
-	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd-MM-yyyy")
 	@Column(name = "dt")
 	private Date date;
 	
