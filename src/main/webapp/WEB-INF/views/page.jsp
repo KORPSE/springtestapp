@@ -31,6 +31,9 @@
     </head>
         <body>
     	<section id="springtestapp">
+    		<div align="right">
+    			[<a href="?lang=en">EN</a>] [<a href="?lang=ru">RU</a>]
+    		</div>
 	        <h3 align="center"><spring:message code="label.letters"/>: </h3>
 	        <div align="center">
 	        	<form id="insertForm">
@@ -69,28 +72,32 @@
 			<td><@=number@></td>
             <td><@=date@></td>
             <td><@=subject@></td>
-            <td><input type="checkbox" <@=(published ? "checked" : "")@>></td>
+            <td><input type="checkbox" class="published" <@=(published ? "checked" : "")@> <@=(published ? "disabled" : "")@>></td>
             <td><a href="/springtestapp/upload/<@=file.id@>"><@=file.name@></a></td>
             <td><@=description@></td>
 			<td><button class="removeLink" href="#"><spring:message code="label.delete"/></button></td>
         </script>
         <!-- Scripts -->
-        <script src="js/libs/jquery.js"></script>
-        <script src="js/libs/underscore.js"></script>
-        <script src="js/libs/backbone.js"></script>
-        <script src="js/libs/backbone.syphon.js"></script>
+        <script src="static/js/libs/jquery.js"></script>
+        <script src="static/js/libs/underscore.js"></script>
+        <script src="static/js/libs/backbone.js"></script>
+        <script src="static/js/libs/backbone.syphon.js"></script>
 
-        <script src="js/app.js"></script>
-        <script src="js/models/letter.js"></script>
-        <script src="js/views/letter.js"></script>
-        <script src="js/collections/letters.js"></script>
-        <script src="js/views/letters.js"></script>
+        <script src="static/js/app.js"></script>
+        <script src="static/js/models/letter.js"></script>
+        <script src="static/js/views/letter.js"></script>
+        <script src="static/js/collections/letters.js"></script>
+        <script src="static/js/views/letters.js"></script>
 
         <script>
 	        $("#uploadLink").on("click", function(){
 	        	$("#fileUpload").click();
        		})
        		$("#fileUpload").on("change", function() {
+       			
+       			if ($("#fileUpload")[0].files.length == 0) {
+	        		return;
+	        	}
        			
        			var data = new FormData();
        			data.append("fileUpload", $("#fileUpload")[0].files[0]);
@@ -110,10 +117,9 @@
        			    }
        			});
        			
-    	        $("#uploadLink").on("click", function(){
-    	        	$("#fileUpload").click();
-           		})
        		});
+
+
         </script>
 
     </body>

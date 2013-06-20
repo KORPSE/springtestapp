@@ -67,7 +67,7 @@
 			<td><%=number%></td>
             <td><%=date%></td>
             <td><%=subject%></td>
-            <td><input type="checkbox" <%=(published ? "checked" : "")%>></td>
+            <td><input type="checkbox" class="published" <%=(published ? "checked" : "")%>></td>
             <td><a href="/springtestapp/upload/<%=file.id%>"><%=file.name%></a></td>
             <td><%=description%></td>
 			<td><button class="removeLink" href="#">Удалить</button></td>

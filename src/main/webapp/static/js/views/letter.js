@@ -11,7 +11,8 @@
         template: _.template( $('#letter-template').html() ),
         
         events: {
-            "click .removeLink": "removeEvent"
+            "click .removeLink": "removeEvent",
+            "change .published": "switchPublished"
         },
         
         initialize: function () {
@@ -27,6 +28,11 @@
         removeEvent: function () {
         	this.model.destroy();
         	this.remove();
+        },
+        
+        switchPublished: function (e) {
+        	this.model.set( { published: this.$(".published")[0].checked } );
+        	this.model.save();
         }
         
     });

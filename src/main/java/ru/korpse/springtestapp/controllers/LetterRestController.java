@@ -37,6 +37,15 @@ public class LetterRestController {
 		result.put("id", item.getId());
 		return result;
 	}
+	
+	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+	@ResponseBody
+	public Map<String, Object> update(@PathVariable("id") long id, @RequestBody Letter item) {
+		service.update(item);
+		Map<String, Object> result = new HashMap<String, Object>();
+		result.put("id", item.getId());
+		return result;
+	}
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	@ResponseBody

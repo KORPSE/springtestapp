@@ -41,9 +41,16 @@ public class LetterDao {
 		if (item == null) {
 			return;
 		}
-		getSession().saveOrUpdate(item);
+		getSession().save(item);
 	}
 	
+	@Transactional
+	public void update(Letter item) {
+		if (item == null) {
+			return;
+		}
+		getSession().merge(item);
+	}
 	@Transactional
 	public void delete(long id) {
 		getSession().delete(get(id));

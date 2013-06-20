@@ -45,6 +45,10 @@ public class FileService {
 	
 	@Transactional
 	public File upload(CommonsMultipartFile fileUpload) {
+		if (!(fileUpload.getContentType().toLowerCase().equals("image/jpeg") ||
+				fileUpload.getContentType().toLowerCase().equals("application/pdf"))) {
+			throw new SaveFailException("Only JPEG and PDF type files allowed");
+		}
 		try {
 			File file = new File();
             Blob blob = Hibernate.getLobCreator(getSession())
